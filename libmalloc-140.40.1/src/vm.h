@@ -25,20 +25,22 @@
 #ifndef __VM_H
 #define __VM_H
 
+
 static inline bool
 mvm_aslr_enabled(void)
 {
 	return _dyld_get_image_slide((const struct mach_header *)_NSGetMachExecuteHeader()) != 0;
 }
 
+
 MALLOC_NOEXPORT
 void
 mvm_aslr_init(void);
 
+
 MALLOC_NOEXPORT
 void *
 mvm_allocate_pages(size_t size, unsigned char align, unsigned debug_flags, int vm_page_label);
-
 MALLOC_NOEXPORT
 void *
 mvm_allocate_pages_securely(size_t size, unsigned char align, int vm_page_label, uint32_t debug_flags);
@@ -47,13 +49,15 @@ MALLOC_NOEXPORT
 void
 mvm_deallocate_pages(void *addr, size_t size, unsigned debug_flags);
 
-MALLOC_NOEXPORT
-int
-mvm_madvise_free(rack_t *szone, region_t r, uintptr_t pgLo, uintptr_t pgHi, uintptr_t *last);
+
 
 MALLOC_NOEXPORT
 int
+mvm_madvise_free(rack_t *szone, region_t r, uintptr_t pgLo, uintptr_t pgHi, uintptr_t *last);
+MALLOC_NOEXPORT
+int
 mvm_madvise_reuse(region_t r, uintptr_t pgLo, uintptr_t phHi, uint32_t debug_flags);
+
 
 MALLOC_NOEXPORT
 void
